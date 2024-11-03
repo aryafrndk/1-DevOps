@@ -15,6 +15,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <sonar.maven.plugin.version>3.9.0.2155</sonar.maven.plugin.version> <!-- Latest version of Sonar plugin -->
     </properties>
 
     <dependencies>
@@ -22,7 +23,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version> <!-- or latest version -->
+            <version>5.10.0</version> <!-- Updated version -->
             <scope>test</scope>
         </dependency>
 
@@ -30,7 +31,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.29</version> <!-- or latest version -->
+            <version>8.0.34</version> <!-- Updated version -->
         </dependency>
 
         <!-- Add more dependencies as needed -->
@@ -41,7 +42,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version> <!-- Updated version -->
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -50,12 +51,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version> <!-- Updated version -->
+                <version>3.0.0-M5</version> <!-- Updated version -->
             </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.0.2155</version> <!-- Update to the latest version -->
+                <version>${sonar.maven.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
