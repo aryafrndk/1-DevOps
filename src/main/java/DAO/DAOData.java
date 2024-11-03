@@ -141,4 +141,14 @@ public class DAOData implements IDAOData {
         
         return lstMhs;
     }
+
+        // Metode untuk menghapus semua data
+    public void deleteAll() {
+        String sql = "DELETE FROM tb_mahasiswa"; // Ganti dengan nama tabel yang sesuai
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
