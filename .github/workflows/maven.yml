@@ -10,15 +10,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: your_database_name
-          MYSQL_ROOT_PASSWORD: your_root_password
+          MYSQL_DATABASE: db_mahasiswa
         ports:
           - 3306:3306
         options: >-
@@ -51,6 +49,3 @@ jobs:
 
     - name: Build package
       run: mvn package
-
-volumes:
-  mysql-data:
