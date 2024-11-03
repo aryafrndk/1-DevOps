@@ -12,17 +12,17 @@
     <name>My Java Project</name>
     <description>A simple Java project for demonstration purposes</description>
 
-         <properties>
-             <maven.compiler.source>11</maven.compiler.source>
-             <maven.compiler.target>11</maven.compiler.target>
-         </properties>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <!-- JUnit 5 for unit testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.7.1</version>
+            <version>5.8.2</version> <!-- or latest version -->
             <scope>test</scope>
         </dependency>
 
@@ -31,14 +31,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.29</version> <!-- or latest version -->
-        </dependency>
-
-        <!-- JUnit Vintage for compatibility with JUnit 4 (optional) -->
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.7.1</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Add more dependencies as needed -->
@@ -54,6 +46,11 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.8.1</version> <!-- or latest version -->
             </plugin>
         </plugins>
     </build>
