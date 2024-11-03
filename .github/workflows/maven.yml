@@ -41,3 +41,10 @@ jobs:
 
     - name: Build package
       run: mvn package
+
+    - name: SonarQube
+      run: mvn clean verify sonar:sonar \
+        -Dsonar.projectKey=UTSDevOps \
+        -Dsonar.projectName='UTSDevOps' \
+        -Dsonar.host.url=http://localhost:9000 \
+        -Dsonar.token=sqp_0b2645a77d39fd3f648405ca44b34b62ba13ce66
