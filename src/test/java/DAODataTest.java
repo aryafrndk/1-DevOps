@@ -14,7 +14,6 @@ public class DAODataTest {
     @BeforeEach
     public void setUp() {
         daoData = new DAOData();
-        daoData.deleteAll(); 
     }
 
     @Test
