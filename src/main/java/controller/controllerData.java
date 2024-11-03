@@ -35,9 +35,6 @@ public class controllerData {
         b.setNama(fc.gettxtNama().getText());
         b.setJenisKelamin(fc.getjenisKelamin().getSelectedItem().toString());
         b.setKelas(fc.gettxtKelas().getText());
-        b.setProdi(fc.gettxtProdi().getText());
-        b.setFakultas(fc.gettxtFakultas().getText());
-        b.setAngkatan(fc.gettxtAngkatan().getText());
         iData.insert(b);
         JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!");
     }
@@ -50,9 +47,6 @@ public class controllerData {
         fc.gettxtNama().setText("");
         fc.getjenisKelamin().setSelectedItem("Pilih Jenis Kelamin");
         fc.gettxtKelas().setText("");
-        fc.gettxtProdi().setText("");
-        fc.gettxtFakultas().setText("");
-        fc.gettxtAngkatan().setText("");
     }
     
     // Method untuk mengisi field dengan data yang dipilih dari tabel
@@ -62,21 +56,15 @@ public class controllerData {
         fc.gettxtNama().setText(lstMhs.get(row).getNama());
         fc.getjenisKelamin().setSelectedItem(lstMhs.get(row).getJenisKelamin());
         fc.gettxtKelas().setText(lstMhs.get(row).getKelas());
-        fc.gettxtProdi().setText(lstMhs.get(row).getProdi());
-        fc.gettxtFakultas().setText(lstMhs.get(row).getFakultas());
-        fc.gettxtAngkatan().setText(lstMhs.get(row).getAngkatan());
     }
     
     // Method untuk memperbarui data mahasiswa
     public void update() {
         TambahData b = new TambahData();
-        b.setNim(fc.gettxtNim().getText());
         b.setNama(fc.gettxtNama().getText());
         b.setJenisKelamin(fc.getjenisKelamin().getSelectedItem().toString());
         b.setKelas(fc.gettxtKelas().getText());
-        b.setProdi(fc.gettxtProdi().getText());
-        b.setFakultas(fc.gettxtFakultas().getText());
-        b.setAngkatan(fc.gettxtAngkatan().getText());
+        b.setNim(fc.gettxtNim().getText());
         iData.update(b);
         JOptionPane.showMessageDialog(null, "Berhasil Melakukan Update!");
     }
@@ -89,8 +77,8 @@ public class controllerData {
     
     // Method untuk mencari data mahasiswa berdasarkan NIM atau nama
     public void cari(String keyword) {
-        List<TambahData> searchResults = iData.search(keyword);
-        TabelModelData tabelMhs = new TabelModelData(searchResults);
-        fc.getTabelData().setModel(tabelMhs); 
-    }
+    List<TambahData> searchResults = iData.search(keyword);
+    TabelModelData tabelMhs = new TabelModelData(searchResults);
+    fc.getTabelData().setModel(tabelMhs); 
+}
 }
