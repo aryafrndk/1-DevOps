@@ -14,20 +14,26 @@ public class DAODataTest {
     @BeforeEach
     public void setUp() {
         daoData = new DAOData();
+        dao.deleteAll(); 
     }
 
     @Test
     public void testInsertAndGetAll() {
-        TambahData newData = new TambahData();
-        newData.setNim("12345");
-        newData.setNama("John Doe");
-        newData.setJenisKelamin("Laki-laki");
-        newData.setKelas("1A");
+        DAOData dao = new DAOData();
+        TambahData data = new TambahData();
+        data.setNim("123456");
+        data.setNama("John Doe");  // Pastikan nama yang diharapkan adalah "John Doe"
+        data.setJenisKelamin("Laki-laki");
+        data.setKelas("A");
     
-        daoData.insert(newData);
-        List<TambahData> allData = daoData.getAll();
-        assertFalse(allData.isEmpty(), "Data should not be empty after insert");
-        assertEquals("John Doe", allData.get(0).getNama(), "Inserted data should match");
+        // Masukkan data
+        dao.insert(data);
+    
+        // Ambil semua data
+        List<TambahData> result = dao.getAll();
+    
+        // Verifikasi bahwa nama yang dimasukkan ada dalam hasil
+        assertEquals("John Doe", result.get(0).getNama());  // Periksa apakah nama yang diambil sesuai
     }
 
     @Test
