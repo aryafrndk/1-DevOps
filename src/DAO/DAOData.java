@@ -126,6 +126,30 @@ public class DAOData implements IDAOData {
         }
     }
     
+    public List<TambahData> search(String keyword) {
+    List<TambahData> lstMhs = new ArrayList<>();
+    String sql = "SELECT * FROM tb_mahasiswa WHERE nim LIKE ? OR nama LIKE ?";
+    
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+        statement.setString(1, "%" + keyword + "%");
+        statement.setString(2, "%" + keyword + "%");
+        ResultSet res = statement.executeQuery();
+        
+        while (res.next()) {
+            TambahData mhs = new TambahData();
+            mhs.setNim(res.getString("nim"));
+            mhs.setNama(res.getString("nama"));
+            mhs.setJenisKelamin(res.getString("jenis_kelamin"));
+            mhs.setKelas(res.getString("kelas"));
+            lstMhs.add(mhs);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error while searching data: " + e.getMessage());
+    }
+    
+    return lstMhs;
+}
+    
     //koneksi db
     Connection con;
     //SQL Query

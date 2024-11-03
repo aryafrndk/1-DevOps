@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package DAOInterface;
 
 import java.util.List;
@@ -16,4 +12,5 @@ public interface IDAOData {
     public void insert(TambahData b);
     public void update(TambahData b);
     public void delete(String nim);
+    public List<TambahData> search(String keyword); // Tambahkan method ini
 }

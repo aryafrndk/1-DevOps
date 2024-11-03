@@ -11,9 +11,9 @@ import java.sql.DriverManager;
 
 public class DBConnection {
        
-       static final String DB_URL = "jdbc:mysql://localhost:3308/db_mahasiswa";
+       static final String DB_URL = "jdbc:mysql://localhost:3306/db_mahasiswa";
        static final String USER = "root";
-       static final String PASS = "yesa123";
+       static final String PASS = "";
        public static Connection connectDB(){
            Connection conn = null;
            try{

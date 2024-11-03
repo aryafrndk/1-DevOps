@@ -346,7 +346,8 @@ public class formcrud extends javax.swing.JPanel {
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         // TODO add your handling code here:
-        cari();
+        String keyword = tCari.getText();
+        ctMhs.cari(keyword); 
     }//GEN-LAST:event_btnCariActionPerformed
 
 
