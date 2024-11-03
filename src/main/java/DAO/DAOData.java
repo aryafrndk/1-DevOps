@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
-import javax.swing.JOptionPane;
+
 import DAOInterface.IDAOData;
+import model.TambahData;
+import koneksi.DBConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,19 +11,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.TambahData;
-import koneksi.DBConnection;
 
-/**
- *
- * @author ASUS
- */
 public class DAOData implements IDAOData {
     
     private Connection con;
 
+    // SQL Queries
+    private final String checkQuery = "SELECT COUNT(*) FROM tb_mahasiswa WHERE nim = ?";
+    private final String insert = "INSERT INTO tb_mahasiswa (nim, nama, jenis_kelamin, kelas) VALUES (?, ?, ?, ?)";
+    private final String read = "SELECT * FROM tb_mahasiswa";
+    private final String delete = "DELETE FROM tb_mahasiswa WHERE nim=?";
+    
     public DAOData() {
-        con = DBConnection.connectDB();
+        con = DBConnection.connectDB(); // Ensure your DBConnection is set up correctly
         if (con == null) {
             System.out.println("Failed to establish database connection.");
         }
@@ -32,7 +31,7 @@ public class DAOData implements IDAOData {
 
     @Override
     public List<TambahData> getAll() {
-        List<TambahData> lstMhs = new ArrayList<>(); // Initialize to an empty list
+        List<TambahData> lstMhs = new ArrayList<>();
         try (Statement st = con.createStatement(); ResultSet res = st.executeQuery(read)) {
             while (res.next()) {
                 TambahData mhs = new TambahData();
@@ -69,6 +68,7 @@ public class DAOData implements IDAOData {
             System.out.println("Data berhasil diinput!");
         } catch (SQLException e) {
             System.out.println("Gagal Input Data!");
+            System.out.println(e.getMessage()); // Print the SQL error message
         } finally {
             try {
                 if (resultSet != null) {
@@ -78,17 +78,16 @@ public class DAOData implements IDAOData {
                     statement.close();
                 }
             } catch (SQLException ex) {
-                System.out.println("Gagal Input Data!");
+                System.out.println("Gagal menutup statement!");
             }
         }
     }
 
     @Override
     public void update(TambahData b) {
-        String checkExists = "SELECT COUNT(*) FROM tb_mahasiswa WHERE nim = ?";
-        String update = "UPDATE tb_mahasiswa set nama=?,jenis_kelamin=?,kelas=? WHERE nim=?";
+        String update = "UPDATE tb_mahasiswa SET nama=?, jenis_kelamin=?, kelas=? WHERE nim=?";
         
-        try (PreparedStatement checkStmt = con.prepareStatement(checkExists)) {
+        try (PreparedStatement checkStmt = con.prepareStatement(checkQuery)) {
             checkStmt.setString(1, b.getNim());
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) == 0) {
@@ -102,6 +101,7 @@ public class DAOData implements IDAOData {
                 updateStmt.setString(3, b.getKelas());
                 updateStmt.setString(4, b.getNim());
                 updateStmt.executeUpdate();
+                System.out.println("Data berhasil diupdate!");
             }
         } catch (SQLException e) {
             System.out.println("Gagal Update Data! " + e.getMessage());
@@ -113,6 +113,7 @@ public class DAOData implements IDAOData {
         try (PreparedStatement statement = con.prepareStatement(delete)) {
             statement.setString(1, nim);
             statement.executeUpdate();
+            System.out.println("Data berhasil dihapus!");
         } catch (SQLException e) {
             System.out.println("Gagal Hapus Data! " + e.getMessage());
         }
@@ -140,8 +141,4 @@ public class DAOData implements IDAOData {
         
         return lstMhs;
     }
-
-    // SQL Query
-    String read = "SELECT * FROM tb_mahasiswa";
-    String delete = "DELETE FROM tb_mahasiswa WHERE nim=?";
 }
