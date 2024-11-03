@@ -26,6 +26,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- MySQL Connector/J for database connections -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.29</version> <!-- or latest version -->
+        </dependency>
+
+        <!-- JUnit Vintage for compatibility with JUnit 4 (optional) -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Add more dependencies as needed -->
     </dependencies>
 
