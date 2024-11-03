@@ -14,12 +14,11 @@ public class DAODataTest {
     @BeforeEach
     public void setUp() {
         daoData = new DAOData();
-        dao.deleteAll(); 
+        daoData.deleteAll(); 
     }
 
     @Test
     public void testInsertAndGetAll() {
-        DAOData dao = new DAOData();
         TambahData data = new TambahData();
         data.setNim("123456");
         data.setNama("John Doe");  // Pastikan nama yang diharapkan adalah "John Doe"
@@ -27,10 +26,10 @@ public class DAODataTest {
         data.setKelas("A");
     
         // Masukkan data
-        dao.insert(data);
+        daoData.insert(data);
     
         // Ambil semua data
-        List<TambahData> result = dao.getAll();
+        List<TambahData> result = daoData.getAll();
     
         // Verifikasi bahwa nama yang dimasukkan ada dalam hasil
         assertEquals("John Doe", result.get(0).getNama());  // Periksa apakah nama yang diambil sesuai
