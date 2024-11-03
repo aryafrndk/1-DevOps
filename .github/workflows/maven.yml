@@ -10,13 +10,15 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     services:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: db_mahasiswa
+          MYSQL_DATABASE: your_database_name
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes  # Allow empty password
         ports:
           - 3306:3306
         options: >-
@@ -24,8 +26,6 @@ jobs:
           --health-interval=30s
           --health-timeout=5s
           --health-retries=3
-        volumes:
-          - mysql-data:/var/lib/mysql
 
     steps:
     - name: Checkout code
