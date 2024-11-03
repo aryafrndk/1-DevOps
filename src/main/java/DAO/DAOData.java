@@ -50,31 +50,36 @@ public class DAOData implements IDAOData {
 
     @Override
     public void insert(TambahData b) {
-        String checkQuery = "SELECT COUNT(*) FROM tb_mahasiswa WHERE nim = ?";
-        String insert = "INSERT INTO tb_mahasiswa(nim,nama,jenis_kelamin,kelas) VALUES(?,?,?,?)";
-        
-        try (PreparedStatement statement = con.prepareStatement(checkQuery)) {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = con.prepareStatement(checkQuery);
             statement.setString(1, b.getNim());
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             if (resultSet.next() && resultSet.getInt(1) > 0) {
-                JOptionPane.showMessageDialog(null, "Data sudah ada di dalam database!");
+                System.out.println("Data sudah ada di dalam database!");
                 return;
             }
-
-            try (PreparedStatement insertStmt = con.prepareStatement(insert)) {
-                insertStmt.setString(1, b.getNim());
-                insertStmt.setString(2, b.getNama());
-                insertStmt.setString(3, b.getJenisKelamin());
-                insertStmt.setString(4, b.getKelas());
-                int rowsAffected = insertStmt.executeUpdate();
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(null, "Data berhasil diinput!");
-                } else {
-                    System.out.println("Data gagal diinput!");
-                }
-            }
+            statement = con.prepareStatement(insert);
+            statement.setString(1, b.getNim());
+            statement.setString(2, b.getNama());
+            statement.setString(3, b.getJenisKelamin());
+            statement.setString(4, b.getKelas());
+            statement.execute();
+            System.out.println("Data berhasil diinput!");
         } catch (SQLException e) {
-            System.out.println("Gagal Input Data! " + e.getMessage());
+            System.out.println("Gagal Input Data!");
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Gagal Input Data!");
+            }
         }
     }
 
