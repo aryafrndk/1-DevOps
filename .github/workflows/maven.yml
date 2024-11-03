@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
@@ -18,7 +17,8 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_DATABASE: your_database_name
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes  # Allow empty password
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ""
         ports:
           - 3306:3306
         options: >-
@@ -35,6 +35,8 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
+        distribution: 'temurin' # Specify the distribution here
+        cache: 'maven' # Optional: Cache Maven dependencies
 
     - name: Cache Maven packages
       uses: actions/cache@v2
