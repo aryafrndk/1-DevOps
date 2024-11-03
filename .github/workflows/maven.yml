@@ -42,5 +42,5 @@ jobs:
     - name: Build package
       run: mvn package
 
-    - name: SonarQube
-      run: mvn clean verify sonar:sonar -Dsonar.token=sqp_17f8514284fe42ffc3c1b82982afcbb0a33e25d1
+    - name: Run Maven Build with SonarQube Analysis
+      run: mvn clean verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_17f8514284fe42ffc3c1b82982afcbb0a33e25d1
