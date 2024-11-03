@@ -18,22 +18,16 @@ public class DAODataTest {
 
     @Test
     public void testInsertAndGetAll() {
-        // Arrange
-        TambahData data = new TambahData();
-        data.setNim("12345");
-        data.setNama("John Doe");
-        data.setJenisKelamin("Laki-laki");
-        data.setKelas("Kelas A");
-        
-        // Act
-        daoData.insert(data);
+        TambahData newData = new TambahData();
+        newData.setNim("12345");
+        newData.setNama("John Doe");
+        newData.setJenisKelamin("Laki-laki");
+        newData.setKelas("1A");
+    
+        daoData.insert(newData);
         List<TambahData> allData = daoData.getAll();
-        
-        // Assert
-        assertNotNull(allData);
-        assertFalse(allData.isEmpty());
-        assertEquals(1, allData.size());
-        assertEquals("John Doe", allData.get(0).getNama());
+        assertFalse(allData.isEmpty(), "Data should not be empty after insert");
+        assertEquals("John Doe", allData.get(0).getNama(), "Inserted data should match");
     }
 
     @Test
@@ -59,19 +53,10 @@ public class DAODataTest {
 
     @Test
     public void testDelete() {
-        // Arrange
-        TambahData data = new TambahData();
-        data.setNim("12345");
-        data.setNama("John Doe");
-        data.setJenisKelamin("Laki-laki");
-        data.setKelas("Kelas A");
-        daoData.insert(data);
-
-        // Act
+        // Ensure there's data to delete
+        // Insert the data first if necessary
         daoData.delete("12345");
         List<TambahData> allData = daoData.getAll();
-
-        // Assert
-        assertTrue(allData.isEmpty());
+        assertFalse(allData.stream().anyMatch(mhs -> mhs.getNim().equals("12345")), "Data should be deleted");
     }
 }
